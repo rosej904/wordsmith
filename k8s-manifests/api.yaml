@@ -39,11 +39,11 @@ spec:
               name: api
           env:
             - name: JAVA_TOOL_OPTIONS
-              value: "-Xms256m -Xmx1024m"
+              value: "-Xms256m -Xmx2048m"
           resources:
             requests:
               memory: "512Mi"
               cpu: "100m"
             limits:
-              memory: "1536Mi"
+              memory: "2Gi"
               cpu: "500m"
