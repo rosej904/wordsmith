@@ -17,8 +17,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
-  annotations:
-    instrumentation.opentelemetry.io/inject-go: "true"
   labels:
     app: web
 spec:
@@ -27,6 +25,8 @@ spec:
       app: web
   template:
     metadata:
+      annotations:
+        instrumentation.opentelemetry.io/inject-go: "true"
       labels:
         app: web
     spec:
