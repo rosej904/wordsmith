@@ -26,33 +26,14 @@ spec:
       app: api
   template:
     metadata:
+      annotations:
+        instrumentation.opentelemetry.io/inject-java: "true"
       labels:
         app: api
     spec:
-      initContainers:
-        - name: otel-agent-init
-          image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:latest
-          command: ["cp", "/autoinstrumentation.jar", "/otel/javaagent.jar"]
-          volumeMounts:
-            - mountPath: /otel
-              name: otel-agent
       containers:
         - name: api
           image: zot.lan:5000/wordsmith-api:latest
           ports:
             - containerPort: 8080
               name: api
-          env:
-            - name: JAVA_TOOL_OPTIONS
-              value: "-javaagent:/otel/javaagent.jar"
-            - name: OTEL_SERVICE_NAME
-              value: "wordsmith-api"
-            - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: "http://otel-agent-opentelemetry-collector.otel.svc.cluster.local:4317"
-            - name: OTEL_EXPORTER_OTLP_PROTOCOL
-              value: "grpc"
-            - name: OTEL_TRACES_EXPORTER
-              value: "otlp"
-      volumes:
-        - name: otel-agent
-          emptyDir: {}
