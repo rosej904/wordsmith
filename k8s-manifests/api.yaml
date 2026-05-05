@@ -32,7 +32,7 @@ spec:
       initContainers:
         - name: otel-agent-init
           image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:latest
-          command: ["cp", "/javaagent.jar", "/otel/javaagent.jar"]
+          command: ["cp", "/autoinstrumentation.jar", "/otel/javaagent.jar"]
           volumeMounts:
             - mountPath: /otel
               name: otel-agent
