@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "jr-lab-tf-state"             # The bucket you created manually
+    bucket = "jr-lab-tf-state-445606683808-us-east-1-an"             # The bucket you created manually
     key    = "exercises/s3-new/terraform.tfstate"
     region = "us-east-1"
   }
